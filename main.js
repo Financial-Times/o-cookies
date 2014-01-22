@@ -1,4 +1,4 @@
-var defaultCookieOptions = { domain: ".ft.com", path: "/", expires: 730 },
+var cookie = require('./cookie'),
     formats = {
         "AYSC": "underscore",
         "FT_U": "underscoreEquals",
@@ -7,28 +7,12 @@ var defaultCookieOptions = { domain: ".ft.com", path: "/", expires: 730 },
         "FTQA": "commaEquals"
     };
 
-/** Get a cookie's value
- * @param {string} name The cookie's name
- * @return {string|undefined}
- * */
-function getValue(name) {
-    return FT.$.cookie(name);
-}
+cookie.defaults = { 
+    domain: ".ft.com",
+    path: "/",
+    expires: 730
+};
 
-/** Set a cookie
- * @param {string} name The cookie's name
- * @param {string} value The cookie's value
- * */
-function setValue(name, value, options) {
-    FT.$.cookie(name, value, options);
-}
-
-/** Delete a cookie
- * @param {string} name The cookie's name
- * */
-function remove(name) {
-    FT.$.cookie(name, null);
-}
 
 function getRegExp(name, param) {
     var re;
@@ -58,7 +42,7 @@ function getRegExp(name, param) {
  * @return {string|undefined}
  */
 function getParam(name, param) {
-    var wholeValue = getValue(name) || "", matches;
+    var wholeValue = cookie(name) || "", matches;
     if (param) {
         matches = wholeValue.match(getRegExp(name, param));
     }
@@ -83,19 +67,20 @@ function updateAYSCValue(wholeValue, param, value) {
  * @param {string} value The parameter's value
  * */
 function setParam(name, param, value) {
-    var wholeValue = getValue(name) || "";
-    if (name === "AYSC") {
-        wholeValue = updateAYSCValue(wholeValue, param, value);
-    } else {
-        throw new Error("FT.cookie.setParam() currently only works for AYSC");
+    if (name !== "AYSC") {
+        throw new Error("cookie.setParam() currently only works for AYSC");
     }
-    setValue("AYSC", wholeValue, defaultCookieOptions);
+
+    var wholeValue = cookie(name) || "";
+    
+    wholeValue = updateAYSCValue(wholeValue, param, value);
+    cookie("AYSC", wholeValue, defaultCookieOptions);
 }
 
 module.exports = {
-    get: getValue,
-    set: setValue,
-    remove: remove,
+    get: cookie,
+    set: cookie,
+    remove: cookie.remove,
     getParam: getParam,
     setParam: setParam
 };  
