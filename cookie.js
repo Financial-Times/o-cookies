@@ -37,7 +37,7 @@ function cookie (key, value, options) {
 
 		if (key && key === name) {
 			// If second argument (value) is a function it's a converter...
-			result = value;
+			result = cookie;
 			break;
 		}
 	}
