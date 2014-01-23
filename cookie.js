@@ -1,42 +1,10 @@
 var pluses = /\+/g;
 
-function encode(s) {
-	return config.raw ? s : encodeURIComponent(s);
-}
-
-function decode(s) {
-	return config.raw ? s : decodeURIComponent(s);
-}
-
-function stringifyCookieValue(value) {
-	return encode(config.json ? JSON.stringify(value) : String(value));
-}
-
-function parseCookieValue(s) {
-	if (s.indexOf('"') === 0) {
-		// This is a quoted cookie as according to RFC2068, unescape...
-		s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-	}
-
-	try {
-		// Replace server-side written pluses with spaces.
-		// If we can't decode the cookie, ignore it, it's unusable.
-		// If we can't parse the cookie, ignore it, it's unusable.
-		s = decodeURIComponent(s.replace(pluses, ' '));
-		return config.json ? JSON.parse(s) : s;
-	} catch(e) {}
-}
-
-function read(s, converter) {
-	var value = config.raw ? s : parseCookieValue(s);
-	return $.isFunction(converter) ? converter(value) : value;
-}
-
 function cookie (key, value, options) {
 
 	// Write
 
-	if (value !== undefined && !$.isFunction(value)) {
+	if (value !== undefined) {
 		options = $.extend({}, config.defaults, options);
 
 		if (typeof options.expires === 'number') {
@@ -45,7 +13,7 @@ function cookie (key, value, options) {
 		}
 
 		return (document.cookie = [
-			encode(key), '=', stringifyCookieValue(value),
+			encodeURIComponent(key), '=', encodeURIComponent(String(value)),
 			options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 			options.path    ? '; path=' + options.path : '',
 			options.domain  ? '; domain=' + options.domain : '',
@@ -64,18 +32,13 @@ function cookie (key, value, options) {
 
 	for (var i = 0, l = cookies.length; i < l; i++) {
 		var parts = cookies[i].split('=');
-		var name = decode(parts.shift());
+		var name = decodeURIComponent(parts.shift());
 		var cookie = parts.join('=');
 
 		if (key && key === name) {
 			// If second argument (value) is a function it's a converter...
-			result = read(cookie, value);
+			result = value;
 			break;
-		}
-
-		// Prevent storing a cookie that we couldn't decode.
-		if (!key && (cookie = read(cookie)) !== undefined) {
-			result[name] = cookie;
 		}
 	}
 
@@ -87,8 +50,6 @@ cookie.remove = function (name) {
 };
 
 var config = cookie;
-
-
 
 config.defaults = {};
 
