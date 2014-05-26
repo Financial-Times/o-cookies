@@ -7,8 +7,8 @@ var cookie = require('./cookie'),
         "FTQA": "commaEquals"
     };
 
-cookie.defaults = { 
-    domain: ".ft.com",
+cookie.defaults = {
+    domain: location.hostname,
     path: "/",
     expires: 730
 };
@@ -72,7 +72,7 @@ function setParam(name, param, value) {
     }
 
     var wholeValue = cookie(name) || "";
-    
+
     wholeValue = updateAYSCValue(wholeValue, param, value);
     cookie("AYSC", wholeValue, defaultCookieOptions);
 }
@@ -83,4 +83,4 @@ module.exports = {
     remove: cookie.remove,
     getParam: getParam,
     setParam: setParam
-};  
+};

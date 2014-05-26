@@ -1,0 +1,7 @@
+{
+    "description": "Utility for getting and setting cookies, including read/write of individual values within compound FT cookies",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "rhys.evans@ft.com",
+    "supportStatus": "active",
+}

@@ -1,15 +1,6 @@
-# Cookies module <small>o-cookies</small>
+# Cookies module
 
-Cookies module provides a utility for rgetting or setting the value of a site's cookies. It also contains additional methods for getting and setting parameters of certain FT cookies (which use a variety of different syntaxes)
-
-## Installation
-
-Run the following in your project's root directory
-   
-    bower install o-grid=http://git.svc.ft.com:9080/git/origami/o-cookies.git
-    
-(If your project doesn't already contain a bower.json file you will need to create one first with the content `{"name": "your-project-name"}`)
-
+Provides a utility for getting or setting the value of cookies.  Also contains additional methods for getting and setting parameters of certain FT cookies (which use a variety of different syntaxes)
 
 ## API
 
@@ -22,3 +13,20 @@ Run the following in your project's root directory
 * `remove(name)` - unsets the value of a cookie
 * `getParam(name, param)` - gets the value stored in the given parameter within cookie `name` (only works for some FT cookies which use a predefined syntax for separating parameters)
 * `setParam(name, param, value)` - sets the value stored in the given parameter within cookie `name` (only works for the AYSC FT cookie)
+
+## Supported FT cookies
+
+The following FT cookies are supported for setting and fetching key-value data from within the cookie
+
+* `AYSC`
+* `FT_U`
+* `FT_Remember`
+* `FT_User`
+* `FTQA`
+
+Example:
+
+```javascript
+// Get the value of slot 2 in the AYSC cookie
+var val = require('o-cookies').getParam('AYSC', '02');
+```
