@@ -1,5 +1,14 @@
 var pluses = /\+/g;
 
+
+function encode(s, raw) {
+	return raw ? s : encodeURIComponent(s);
+}
+
+function decode(s, raw) {
+	return raw ? s : decodeURIComponent(s);
+}
+
 function cookie (key, value, options) {
 
 	// Write
@@ -13,7 +22,7 @@ function cookie (key, value, options) {
 		}
 
 		return (document.cookie = [
-			encodeURIComponent(key), '=', encodeURIComponent(String(value)),
+			encodeURIComponent(key), '=', encode(String(value), options.raw),
 			options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 			options.path    ? '; path=' + options.path : '',
 			options.domain  ? '; domain=' + options.domain : '',
@@ -42,7 +51,7 @@ function cookie (key, value, options) {
 		}
 	}
 
-	return result;
+	return decode(result);
 };
 
 cookie.remove = function (name) {
