@@ -82,5 +82,6 @@ module.exports = {
     set: cookie,
     remove: cookie.remove,
     getParam: getParam,
-    setParam: setParam
+    setParam: setParam,
+    defaults: cookie.defaults
 };
