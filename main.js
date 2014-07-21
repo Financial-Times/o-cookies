@@ -54,7 +54,7 @@ function updateAYSCValue(wholeValue, param, value) {
         wholeValue = "_";
     }
     var paramValue = getParam("AYSC", param);
-    if (FT.$.type(paramValue) === "undefined") {
+    if (typeof paramValue === "undefined") {
         return wholeValue + param + value + "_";
     } else {
         return wholeValue.replace(getRegExp("AYSC", param), "_" + param + value + "_");

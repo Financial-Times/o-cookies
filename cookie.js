@@ -5,7 +5,12 @@ function cookie (key, value, options) {
 	// Write
 
 	if (value !== undefined) {
-		options = $.extend({}, config.defaults, options);
+
+		options = options || {};
+		
+		Object.keys(config.defaults).forEach(function (key) {
+			options[key] = options[key] || config.defaults[key];
+		});
 
 		if (typeof options.expires === 'number') {
 			var days = options.expires, t = options.expires = new Date();
