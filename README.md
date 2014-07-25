@@ -10,6 +10,7 @@ Provides a utility for getting or setting the value of cookies.  Also contains a
 	* `path`: The path where the cookie is valid *default: '/'*
 	* `domain`: The domain where the cookie is valid *default: '.ft.com'*
 	* `secure`: If `true` the cookie will only be sent over https *default: false*
+    * `raw`: If set to `true` gets/sets a cookie's value without sanitising it with `encode/decodeURIComponent()`
 * `remove(name)` - unsets the value of a cookie
 * `getParam(name, param)` - gets the value stored in the given parameter within cookie `name` (only works for some FT cookies which use a predefined syntax for separating parameters)
 * `setParam(name, param, value)` - sets the value stored in the given parameter within cookie `name` (only works for the AYSC FT cookie)
