@@ -2,6 +2,9 @@
 
 Provides a utility for getting or setting the value of cookies.  Also contains additional methods for getting and setting parameters of certain FT cookies (which use a variety of different syntaxes)
 
+## Browser support
+This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+
 ## API
 
 * `get(name)` - retrieves the value of cookie `name`
