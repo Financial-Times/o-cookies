@@ -1,3 +1,5 @@
+'use strict';
+
 var pluses = /\+/g;
 
 
@@ -9,14 +11,14 @@ function decode(s, raw) {
 	return raw ? s : decodeURIComponent(s);
 }
 
-function cookie (key, value, options) {
+function cookie(key, value, options) {
 
 	// Write
 
 	if (value !== undefined) {
 
 		options = options || {};
-		
+
 		Object.keys(config.defaults).forEach(function (key) {
 			options[key] = options[key] || config.defaults[key];
 		});
@@ -57,7 +59,7 @@ function cookie (key, value, options) {
 	}
 
 	return decode(result);
-};
+}
 
 cookie.remove = function (name) {
 	cookie(name, null);
