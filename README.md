@@ -34,3 +34,11 @@ Example:
 // Get the value of slot 2 in the AYSC cookie
 var val = require('o-cookies').getParam('AYSC', '02');
 ```
+
+----
+
+## License
+
+Copyright (c) 2015 Financial Times Ltd. All rights reserved.
+
+This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
