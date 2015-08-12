@@ -1,5 +1,5 @@
-var cookie = require('./cookie'),
-    formats = {
+const cookie = require('./cookie');
+const formats = {
         "AYSC": "underscore",
         "FT_U": "underscoreEquals",
         "FT_Remember": "colonEquals",
@@ -15,7 +15,7 @@ cookie.defaults = {
 
 
 function getRegExp(name, param) {
-    var re;
+    let re;
     switch (formats[name]) {
     case "underscore":
         re = '_' + param + '([^_]*)_';
@@ -42,7 +42,8 @@ function getRegExp(name, param) {
  * @return {string|undefined}
  */
 function getParam(name, param) {
-    var wholeValue = cookie(name) || "", matches;
+    const wholeValue = cookie(name) || "";
+    let matches;
     if (param) {
         matches = wholeValue.match(getRegExp(name, param));
     }
@@ -53,7 +54,7 @@ function updateAYSCValue(wholeValue, param, value) {
     if (!wholeValue) {
         wholeValue = "_";
     }
-    var paramValue = getParam("AYSC", param);
+    const paramValue = getParam("AYSC", param);
     if (typeof paramValue === "undefined") {
         return wholeValue + param + value + "_";
     } else {
@@ -71,7 +72,7 @@ function setParam(name, param, value) {
         throw new Error("cookie.setParam() currently only works for AYSC");
     }
 
-    var wholeValue = cookie(name) || "";
+    let wholeValue = cookie(name) || "";
 
     wholeValue = updateAYSCValue(wholeValue, param, value);
     cookie("AYSC", wholeValue, defaultCookieOptions);
