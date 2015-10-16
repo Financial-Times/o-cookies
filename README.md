@@ -1,5 +1,7 @@
 # Cookies module
 
+This module is deprecated and is no longer maintained. Consider a [more standard approach](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie) to handling cookies.
+
 Provides a utility for getting or setting the value of cookies.  Also contains additional methods for getting and setting parameters of certain FT cookies (which use a variety of different syntaxes)
 
 ## Browser support
