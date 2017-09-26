@@ -1,6 +1,3 @@
-var pluses = /\+/g;
-
-
 function encode(s, raw) {
 	return raw ? s : encodeURIComponent(s);
 }
@@ -16,38 +13,39 @@ function cookie (key, value, options) {
 	if (value !== undefined) {
 
 		options = options || {};
-		
+
 		Object.keys(config.defaults).forEach(function (key) {
 			options[key] = options[key] || config.defaults[key];
 		});
 
 		if (typeof options.expires === 'number') {
-			var days = options.expires, t = options.expires = new Date();
+			const days = options.expires;
+			const t = options.expires = new Date();
 			t.setTime(+t + days * 864e+5);
 		}
 
 		return (document.cookie = [
 			encodeURIComponent(key), '=', encode(String(value), options.raw),
 			options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-			options.path    ? '; path=' + options.path : '',
-			options.domain  ? '; domain=' + options.domain : '',
-			options.secure  ? '; secure' : ''
+			options.path ? '; path=' + options.path : '',
+			options.domain ? '; domain=' + options.domain : '',
+			options.secure ? '; secure' : ''
 		].join(''));
 	}
 
 	// Read
 
-	var result = key ? undefined : {};
+	let result = key ? undefined : {};
 
 	// To prevent the for loop in the first place assign an empty array
 	// in case there are no cookies at all. Also prevents odd result when
 	// calling $.cookie().
-	var cookies = document.cookie ? document.cookie.split('; ') : [];
+	const cookies = document.cookie ? document.cookie.split('; ') : [];
 
-	for (var i = 0, l = cookies.length; i < l; i++) {
-		var parts = cookies[i].split('=');
-		var name = decodeURIComponent(parts.shift());
-		var cookie = parts.join('=');
+	for (let i = 0, l = cookies.length; i < l; i++) {
+		const parts = cookies[i].split('=');
+		const name = decodeURIComponent(parts.shift());
+		const cookie = parts.join('=');
 
 		if (key && key === name) {
 			// If second argument (value) is a function it's a converter...
@@ -57,13 +55,13 @@ function cookie (key, value, options) {
 	}
 
 	return decode(result);
-};
+}
 
 cookie.remove = function (name) {
 	cookie(name, null);
 };
 
-var config = cookie;
+const config = cookie;
 
 config.defaults = {};
 
