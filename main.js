@@ -75,7 +75,7 @@ function setParam(name, param, value) {
 	let wholeValue = cookie(name) || "";
 
 	wholeValue = updateAYSCValue(wholeValue, param, value);
-	cookie("AYSC", wholeValue, defaultCookieOptions);
+	cookie("AYSC", wholeValue, cookie.defaults);
 }
 
 module.exports = {
