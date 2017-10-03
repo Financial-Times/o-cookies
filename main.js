@@ -17,21 +17,21 @@ cookie.defaults = {
 function getRegExp(name, param) {
 	let re;
 	switch (formats[name]) {
-	case "underscore":
-		re = '_' + param + '([^_]*)_';
-		break;
-	case "underscoreEquals":
-		re = '_' + param + '=([^_]*)_';
-		break;
-	case "colonEquals":
-		re = ':' + param + '=([^:]*)';
-		break;
-	case "commaEquals":
-		re = param + '=([^,]*)';
-		break;
-	default:
-		re = /((.|\n)*)/; // match everything
-		break;
+		case "underscore":
+			re = '_' + param + '([^_]*)_';
+			break;
+		case "underscoreEquals":
+			re = '_' + param + '=([^_]*)_';
+			break;
+		case "colonEquals":
+			re = ':' + param + '=([^:]*)';
+			break;
+		case "commaEquals":
+			re = param + '=([^,]*)';
+			break;
+		default:
+			re = /((.|\n)*)/; // match everything
+			break;
 	}
 	return new RegExp(re);
 }
